@@ -62,14 +62,18 @@ world <- data_total[data_total$iso3 == 'WLD', ]
 
 world_spark_plot <- ggplot(world, aes(period, value, color = source)) + theme_bw() +
     geom_line(stat = 'identity', size = 1.3) +
-    ylab("") + xlab("") +
+    ylab("Number of Disaster Events") + xlab("") +
     theme(panel.border = element_rect(linetype = 0),
           strip.background = element_rect(colour = "white", fill = "white"),
           panel.background = element_rect(colour = "white"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           legend.title = element_blank(),
-          legend.key = element_blank())
+          axis.title.y = element_text(size = 7, face = 'italic'),
+          legend.key = element_blank()) + 
+    scale_x_continuous(limits = c(1950, 2014),
+                       labels = c(1950, 1960, 1970, 1980, 1990, 2000, 2014),
+                       breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2014))
     
 ggsave('plot/world_spark_plot.png', world_spark_plot, width = 9.11, height = 3, units = 'in')
 
@@ -77,14 +81,18 @@ ggsave('plot/world_spark_plot.png', world_spark_plot, width = 9.11, height = 3, 
 world_spark_plot_scale <- ggplot(world, aes(period, value, color = source)) + theme_bw() +
     geom_line(stat = 'identity', size = 1.3) +
     facet_wrap(~ source, scale = 'free_y') +
-    ylab("") + xlab("") +
+    ylab("Number of Disaster Events") + xlab("") +
     theme(panel.border = element_rect(linetype = 0),
           strip.background = element_rect(colour = "white", fill = "white"),
           panel.background = element_rect(colour = "white"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           legend.title = element_blank(),
-          legend.key = element_blank())
+          axis.title.y = element_text(size = 7, face = 'italic'),
+          legend.key = element_blank()) +
+    scale_x_continuous(limits = c(1950, 2014),
+                       labels = c(1950, 1960, 1970, 1980, 1990, 2000, 2014),
+                       breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2014))
     
 
 ggsave('plot/world_spark_plot_scale.png', world_spark_plot_scale, width = 9.11, height = 3, units = 'in')
@@ -128,20 +136,22 @@ world_s <- data_total_s[data_total_s$iso3 == 'WLD', ]
 
 
 
-
-
-
+## making plots for only comparable contries
 world_spark_plot_s <- 
     ggplot(world_s, aes(period, value, group = source, color = source)) + theme_bw() +
     geom_line(stat = 'identity', size = 1.3) +
-    ylab("") + xlab("") +
+    ylab("Number of Disaster Events") + xlab("") +
     theme(panel.border = element_rect(linetype = 0),
           strip.background = element_rect(colour = "white", fill = "white"),
           panel.background = element_rect(colour = "white"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           legend.title = element_blank(),
-          legend.key = element_blank())
+          axis.title.y = element_text(size = 7, face = 'italic'),
+          legend.key = element_blank()) +
+    scale_x_continuous(limits = c(1950, 2014),
+                       labels = c(1950, 1960, 1970, 1980, 1990, 2000, 2014),
+                       breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2014))
 
 ggsave('plot/world_spark_plot_s.png', world_spark_plot_s, width = 9.11, height = 3, units = 'in')
 
@@ -149,16 +159,48 @@ ggsave('plot/world_spark_plot_s.png', world_spark_plot_s, width = 9.11, height =
 world_spark_plot_scale_s <- ggplot(world_s, aes(period, value, color = source)) + theme_bw() +
     geom_line(stat = 'identity', size = 1.3) +
     facet_wrap(~ source, scale = 'free_y') +
-    ylab("") + xlab("") +
+    ylab("Number of Disaster Events") + xlab("") +
     theme(panel.border = element_rect(linetype = 0),
           strip.background = element_rect(colour = "white", fill = "white"),
           panel.background = element_rect(colour = "white"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           legend.title = element_blank(),
-          legend.key = element_blank())
+          axis.title.y = element_text(size = 7, face = 'italic'),
+          legend.key = element_blank()) +
+    scale_x_continuous(limits = c(1950, 2014),
+                       labels = c(1950, 1960, 1970, 1980, 1990, 2000, 2014),
+                       breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2014))
 
 
 ggsave('plot/world_spark_plot_scale_s.png', world_spark_plot_scale_s, width = 9.11, height = 3, units = 'in')
 
+
+
+
+
+## country-specific plots
+country_list <- c('COL', 'YEM', 'KEN')
+world_f <- data_total_s[data_total_s$iso3 %in% country_list, ]
+
+
+world_spark_plot_scale_f <- ggplot(world_f, aes(period, value, color = source)) + theme_bw() +
+    geom_step(stat = 'identity', size = 1.3) +
+    facet_wrap(~ name, scale = 'free_y') +
+    ylab("Number of Disaster Events") + xlab("") +
+    theme(panel.border = element_rect(linetype = 0),
+          strip.background = element_rect(colour = "white", fill = "white"),
+          panel.background = element_rect(colour = "white"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          legend.title = element_blank(),
+          legend.key = element_blank(),
+          axis.text.x = element_text(angle = 90, size = 6),
+          axis.title.y = element_text(size = 7, face = 'italic')) +
+    scale_x_continuous(breaks = c(2000:2014),
+                       labels = c(2000:2014),
+                       limits = c(2000, 2014))
+
+
+ggsave('plot/world_spark_plot_scale_f.png', world_spark_plot_scale_f, width = 9.11, height = 3, units = 'in')
 
