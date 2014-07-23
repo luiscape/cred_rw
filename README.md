@@ -14,3 +14,7 @@ However, if we compare both sources on a free scale we can see that they resembl
 #### Comparing both sources on each country.
 If we make that same comparison at the country level, we can see that in a few countries the relationship betwen sources is more comparable than in other countries. ReliefWeb, in particular, does not register events in the majority of countries that CRED does.
 ![Comparing both sources on each country.](plot/spark_plot.png)
+
+#### Comparing only the countires that both have data
+If we compare only the countries in which both CRED and ReliefWeb have data we have a fairer comparison. CRED has data about **215** countries while ReliefWeb only has data about **69** countries. If we compare then only in the 69 overlapping countries, the plot looks slightly different and a bit more comparable in terms of scale.
+![Comparing both sources globally, only in the overlapping countries.](plot/world_spark_plot_s.png)
