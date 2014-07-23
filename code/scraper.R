@@ -22,8 +22,8 @@ rw_molten$period <- sub("X", "", rw_molten$period)
 cred_molten$period <- sub("X", "", cred_molten$period)
 
 # adding source + creating single dataset
-rw_molten$source <- 'rw'
-cred_molten$source <- 'cred'
+rw_molten$source <- 'ReliefWeb'
+cred_molten$source <- 'CRED'
 data <- rbind(rw_molten, cred_molten)
 
 # writing CSV

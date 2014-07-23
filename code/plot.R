@@ -28,7 +28,7 @@ ggsave('plot/spark_plot.png', spark_plot, heigh = 10.5, width = 16.39, units = '
 
 ## comparing totals ##
 # relifeweb
-rw_total <- data[data$source == 'rw', ]
+rw_total <- data[data$source == 'ReliefWeb', ]
 year_list <- unique(rw_total$period)
 for (i in 1:length(unique(rw_total$period))) {
     it <- rw_total[rw_total$period == year_list[i], ]
@@ -42,7 +42,7 @@ for (i in 1:length(unique(rw_total$period))) {
 }
 
 # cred
-cred_total <- data[data$source == 'cred', ]
+cred_total <- data[data$source == 'CRED', ]
 year_list <- unique(cred_total$period)
 for (i in 1:length(unique(cred_total$period))) {
     it <- cred_total[cred_total$period == year_list[i], ]
@@ -88,4 +88,3 @@ world_spark_plot_scale <- ggplot(world, aes(period, value, color = source)) + th
     
 
 ggsave('plot/world_spark_plot_scale.png', world_spark_plot_scale, width = 9.11, height = 3, units = 'in')
-
